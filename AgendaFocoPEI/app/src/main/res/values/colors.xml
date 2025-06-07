@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Material Theme Colors (Exemplos, podem ser customizados no themes.xml) -->
+    <color name="colorPrimary">#FF6200EE</color> <!-- Exemplo: Purple 500 -->
+    <color name="colorPrimaryVariant">#FF3700B3</color> <!-- Exemplo: Purple 700 -->
+    <color name="colorSecondary">#FF03DAC5</color> <!-- Exemplo: Teal 200 -->
+    <color name="colorSecondaryVariant">#FF018786</color> <!-- Exemplo: Teal 700 -->
+</resources>
