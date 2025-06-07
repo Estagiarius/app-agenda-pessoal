@@ -54,4 +54,64 @@ interface HorarioAulaDao {
         ORDER BY h.dia_da_semana ASC, h.hora_inicio ASC
     """)
     fun buscarTodosParaDisplay(): Flow<List<com.agendafocopei.ui.model.HorarioAulaDisplay>>
+
+    @Transaction
+    @Query("""
+        SELECT
+            h.id,
+            h.dia_da_semana AS diaDaSemana,
+            h.hora_inicio AS horaInicio,
+            h.hora_fim AS horaFim,
+            d.nome_disciplina AS nomeDisciplina,
+            d.cor AS corDisciplina,
+            t.nome_turma AS nomeTurma,
+            t.cor AS corTurma,
+            h.sala_aula AS salaAula
+        FROM horarios_aula h
+        INNER JOIN disciplinas d ON h.disciplinaId = d.id
+        INNER JOIN turmas t ON h.turmaId = t.id
+        WHERE h.dia_da_semana = :diaSemanaAtual AND h.hora_inicio > :horaAtual
+        ORDER BY h.hora_inicio ASC
+        LIMIT 1
+    """)
+    suspend fun buscarProximoHorarioAulaDoDia(diaSemanaAtual: Int, horaAtual: String): com.agendafocopei.ui.model.HorarioAulaDisplay?
+
+    @Transaction
+    @Query("""
+        SELECT
+            h.id,
+            h.dia_da_semana AS diaDaSemana,
+            h.hora_inicio AS horaInicio,
+            h.hora_fim AS horaFim,
+            d.nome_disciplina AS nomeDisciplina,
+            d.cor AS corDisciplina,
+            t.nome_turma AS nomeTurma,
+            t.cor AS corTurma,
+            h.sala_aula AS salaAula
+        FROM horarios_aula h
+        INNER JOIN disciplinas d ON h.disciplinaId = d.id
+        INNER JOIN turmas t ON h.turmaId = t.id
+        WHERE h.dia_da_semana = :diaSemanaAtual
+        ORDER BY h.hora_inicio ASC
+    """)
+    fun buscarTodosParaDisplayPorDia(diaSemanaAtual: Int): Flow<List<com.agendafocopei.ui.model.HorarioAulaDisplay>>
+
+    @Transaction
+    @Query("""
+        SELECT
+            h.id,
+            h.dia_da_semana AS diaDaSemana,
+            h.hora_inicio AS horaInicio,
+            h.hora_fim AS horaFim,
+            d.nome_disciplina AS nomeDisciplina,
+            d.cor AS corDisciplina,
+            t.nome_turma AS nomeTurma,
+            t.cor AS corTurma,
+            h.sala_aula AS salaAula
+        FROM horarios_aula h
+        INNER JOIN disciplinas d ON h.disciplinaId = d.id
+        INNER JOIN turmas t ON h.turmaId = t.id
+        WHERE h.id = :horarioId
+    """)
+    suspend fun buscarDisplayPorId(horarioId: Int): com.agendafocopei.ui.model.HorarioAulaDisplay?
 }

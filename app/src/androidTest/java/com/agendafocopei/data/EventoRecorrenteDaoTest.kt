@@ -130,4 +130,48 @@ class EventoRecorrenteDaoTest {
         assertEquals(1, eventosDomingo.size)
         assertTrue(eventosDomingo.all { it.diaDaSemana == Calendar.SUNDAY })
     }
+
+    @Test
+    fun buscarProximoEventoDoDia_encontraProximoCorretamente() = runBlocking {
+        val diaSemanaAtual = Calendar.WEDNESDAY
+        val horaAtualSimulada = "13:30"
+
+        eventoRecorrenteDao.inserir(EventoRecorrente(nomeEvento = "Almoço", diaDaSemana = diaSemanaAtual, horaInicio = "12:00", horaFim = "13:00", salaLocal = "Refeitório", cor = Color.GRAY, observacoes = null)) // Passou
+        val proximoEsperado = EventoRecorrente(nomeEvento = "Reunião de Equipe", diaDaSemana = diaSemanaAtual, horaInicio = "14:00", horaFim = "15:00", salaLocal = "Sala Conf", cor = Color.BLUE, observacoes = "Pauta X")
+        eventoRecorrenteDao.inserir(proximoEsperado)
+        eventoRecorrenteDao.inserir(EventoRecorrente(nomeEvento = "Café da Tarde", diaDaSemana = diaSemanaAtual, horaInicio = "16:00", horaFim = "16:30", salaLocal = "Copa", cor = Color.YELLOW, observacoes = null)) // Mais tarde
+        eventoRecorrenteDao.inserir(EventoRecorrente(nomeEvento = "Palestra", diaDaSemana = Calendar.THURSDAY, horaInicio = "10:00", horaFim = "11:30", salaLocal = "Auditório", cor = Color.CYAN, observacoes = null)) // Outro dia
+
+        val resultado = eventoRecorrenteDao.buscarProximoEventoDoDia(diaSemanaAtual, horaAtualSimulada)
+        assertNotNull(resultado)
+        assertEquals(proximoEsperado.nomeEvento, resultado?.nomeEvento)
+        assertEquals("14:00", resultado?.horaInicio)
+    }
+
+    @Test
+    fun buscarProximoEventoDoDia_semProximos_retornaNull() = runBlocking {
+        val diaSemanaAtual = Calendar.WEDNESDAY
+        val horaAtualSimulada = "17:00"
+
+        eventoRecorrenteDao.inserir(EventoRecorrente(nomeEvento = "Reunião de Equipe", diaDaSemana = diaSemanaAtual, horaInicio = "14:00", horaFim = "15:00", salaLocal = "Sala Conf", cor = Color.BLUE, observacoes = "Pauta X")) // Passou
+        eventoRecorrenteDao.inserir(EventoRecorrente(nomeEvento = "Palestra", diaDaSemana = Calendar.THURSDAY, horaInicio = "10:00", horaFim = "11:30", salaLocal = "Auditório", cor = Color.CYAN, observacoes = null)) // Outro dia
+
+        val resultado = eventoRecorrenteDao.buscarProximoEventoDoDia(diaSemanaAtual, horaAtualSimulada)
+        assertNull(resultado)
+    }
+
+    @Test
+    fun buscarPorDia_retornaListaOrdenada() = runBlocking { // Renomeando para clareza e verificando ordenação
+        val dia = Calendar.FRIDAY
+        eventoRecorrenteDao.inserir(EventoRecorrente(nomeEvento = "Evento 2", diaDaSemana = dia, horaInicio = "10:00", horaFim = "11:00", salaLocal = "L2", cor = Color.RED, observacoes = null))
+        eventoRecorrenteDao.inserir(EventoRecorrente(nomeEvento = "Evento 1", diaDaSemana = dia, horaInicio = "08:00", horaFim = "09:00", salaLocal = "L1", cor = Color.GREEN, observacoes = null))
+        eventoRecorrenteDao.inserir(EventoRecorrente(nomeEvento = "Evento Outro Dia", diaDaSemana = Calendar.SATURDAY, horaInicio = "09:00", horaFim = "10:00", salaLocal = "L3", cor = Color.BLUE, observacoes = null))
+
+        val eventosDoDia = eventoRecorrenteDao.buscarPorDia(dia).first()
+        assertEquals(2, eventosDoDia.size)
+        assertEquals("Evento 1", eventosDoDia[0].nomeEvento) // Verifica ordem
+        assertEquals("08:00", eventosDoDia[0].horaInicio)
+        assertEquals("Evento 2", eventosDoDia[1].nomeEvento)
+        assertEquals("10:00", eventosDoDia[1].horaInicio)
+    }
 }

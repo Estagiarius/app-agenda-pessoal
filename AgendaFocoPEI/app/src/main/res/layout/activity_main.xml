@@ -68,6 +68,17 @@
         tools:listitem="@layout/list_item_disciplina" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonVerDashboard"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ver Dashboard"
+        app:layout_constraintBottom_toTopOf="@id/buttonGerenciarEventos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonGerenciarHorarios"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
