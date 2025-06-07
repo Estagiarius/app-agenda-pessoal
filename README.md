@@ -29,7 +29,36 @@ Vamos começar a transformar sua organização e foco!
 
 ---
 
-## 2. Primeiros Passos
+## 2. Guia Rápido: Comece a Usar em Minutos!
+
+Bem-vindo(a) ao Agenda Foco PEI! Siga estes passos essenciais para configurar rapidamente o aplicativo e começar a organizar sua rotina:
+
+1.  **Instale e Abra o App:** Baixe o "Agenda Foco PEI" da Play Store e inicie-o.
+2.  **Cadastro Básico (Disciplinas e Turmas - RF-01.1, RF-01.2):**
+    *   Vá em `Configurações > Disciplinas` e adicione as matérias que você leciona.
+    *   Em seguida, em `Configurações > Turmas`, cadastre suas turmas.
+    *   *Dica:* Associe disciplinas às turmas e defina uma **cor** para cada uma (RF-01.4) para melhor visualização!
+3.  **Monte seu Horário Semanal (RF-01.5):**
+    *   Acesse `Configurações > Meu Horário`.
+    *   Adicione seus blocos de aula para cada dia da semana, informando disciplina, turma e sala.
+    *   Não se esqueça de eventos recorrentes como ATPCs (RF-01.6).
+4.  **Explore o Dashboard (Tela Principal - RF-02):**
+    *   Veja seu **próximo compromisso** e as **tarefas urgentes** do dia.
+    *   Use os **botões de acesso rápido** para adicionar tarefas, fazer anotações ou iniciar o temporizador de foco.
+5.  **Crie sua Primeira Tarefa (RF-05.1):**
+    *   Toque em "Adicionar Nova Tarefa" no Dashboard ou vá ao módulo "Tarefas".
+    *   Descreva a tarefa (ex: "Preparar avaliação 7ºB"), defina um prazo e prioridade.
+    *   Configure um **lembrete** (RF-05.2) para não esquecer!
+6.  **Faça uma Anotação Rápida (RF-07.2):**
+    *   Use o botão "Anotação Rápida" (texto ou voz) no Dashboard para registrar ideias, ocorrências ou lembretes importantes na hora.
+7.  **Experimente o Temporizador de Foco (RF-06.1):**
+    *   Precisa se concentrar? Vá ao módulo "Foco" e inicie o **Temporizador Pomodoro**. Configure os tempos de foco e pausa e ative o "Modo Hiperfoco" (RF-06.2) para minimizar distrações.
+
+Pronto! Com esses passos, você já está utilizando as principais funcionalidades do Agenda Foco PEI. Explore os outros módulos (Planejamento, Agenda detalhada) conforme sua necessidade e consulte o manual completo para mais detalhes.
+
+---
+
+## 3. Primeiros Passos
 
 Para começar a usar o Agenda Foco PEI e organizar sua rotina, siga estes passos simples.
 
@@ -112,7 +141,7 @@ Com esses passos concluídos, sua estrutura básica no Agenda Foco PEI estará p
 
 ---
 
-## 3. Conhecendo o Agenda Foco PEI: Uma Visão Geral
+## 4. Conhecendo o Agenda Foco PEI: Uma Visão Geral
 
 Após a configuração inicial, você será apresentado à tela principal do Agenda Foco PEI, também chamada de Dashboard. Ela foi projetada para oferecer uma visão clara e imediata do seu dia, com o mínimo de distrações.
 
@@ -145,7 +174,7 @@ Explore esses menus para se familiarizar com a localização de cada funcionalid
 
 ---
 
-## 4. Funcionalidades Detalhadas: Dominando o Aplicativo
+## 5. Funcionalidades Detalhadas: Dominando o Aplicativo
 
 Agora que você já configurou e conhece a tela principal do Agenda Foco PEI, vamos mergulhar nas funcionalidades específicas que o ajudarão a gerenciar sua rotina de forma eficaz.
 
@@ -245,7 +274,7 @@ Ideias, ocorrências importantes ou insights podem surgir a qualquer momento. Es
 
 ---
 
-## 5. Dicas Poderosas para Professores com TDAH
+## 6. Dicas Poderosas para Professores com TDAH
 
 O Agenda Foco PEI foi desenvolvido com funcionalidades pensadas para apoiar professores, especialmente aqueles que convivem com o Transtorno do Déficit de Atenção com Hiperatividade (TDAH). Aqui estão algumas dicas para aproveitar ao máximo o aplicativo e transformar desafios em pontos fortes:
 
@@ -277,7 +306,7 @@ Lembre-se, a consistência é chave. Quanto mais você integrar o Agenda Foco PE
 
 ---
 
-## 6. Solução de Problemas (FAQ)
+## 7. Solução de Problemas (FAQ)
 
 Aqui estão algumas perguntas frequentes e suas soluções para ajudar você a usar o Agenda Foco PEI da melhor forma.
 
@@ -304,7 +333,7 @@ Aqui estão algumas perguntas frequentes e suas soluções para ajudar você a u
         4.  Certifique-se de que seu dispositivo tem espaço de armazenamento livre suficiente.
         5.  Se o problema persistir, entre em contato com o suporte (veja seção 8).
 
-## 7. Privacidade e Segurança dos Seus Dados (RNF-03)
+## 8. Privacidade e Segurança dos Seus Dados (RNF-03)
 
 Levamos a privacidade e a segurança dos seus dados muito a sério.
 
@@ -314,7 +343,7 @@ Levamos a privacidade e a segurança dos seus dados muito a sério.
     *   **Consentimento:** O uso de funcionalidades que envolvam coleta de dados (como o backup em nuvem) exigirá seu consentimento explícito.
     *   **Acesso e Exclusão de Dados:** Você terá formas claras de visualizar, exportar e apagar todos os seus dados armazenados pelo aplicativo.
 
-## 8. Suporte e Contato
+## 9. Suporte e Contato
 
 Se você tiver dúvidas, encontrar problemas ou tiver sugestões para melhorar o Agenda Foco PEI, gostaríamos de ouvir de você!
 
