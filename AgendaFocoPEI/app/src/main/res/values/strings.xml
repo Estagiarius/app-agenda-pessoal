@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Agenda Foco PEI</string>
+    <string name="selecione_disciplina">Selecione uma Disciplina</string>
+    <string name="selecione_turma">Selecione uma Turma</string>
+</resources>

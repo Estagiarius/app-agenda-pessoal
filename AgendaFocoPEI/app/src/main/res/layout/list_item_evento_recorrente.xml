@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground">
+
+    <View
+        android:id="@+id/viewCorEvento"
+        android:layout_width="12dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:background="@android:color/holo_purple"/>
+
+    <TextView
+        android:id="@+id/textViewNomeEvento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/viewCorEvento"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEditarEvento"
+        tools:text="Reunião Pedagógica Semanal" />
+
+    <TextView
+        android:id="@+id/textViewDiaSemanaEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBody2"
+        app:layout_constraintTop_toBottomOf="@id/textViewNomeEvento"
+        app:layout_constraintStart_toStartOf="@id/textViewNomeEvento"
+        tools:text="Quarta-feira" />
+
+    <TextView
+        android:id="@+id/textViewIntervaloHorarioEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@id/textViewDiaSemanaEvento"
+        app:layout_constraintTop_toTopOf="@id/textViewDiaSemanaEvento"
+        app:layout_constraintBottom_toBottomOf="@id/textViewDiaSemanaEvento"
+        tools:text="14:00 - 16:00" />
+
+    <TextView
+        android:id="@+id/textViewSalaLocalEvento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceCaption"
+        android:layout_marginTop="2dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewDiaSemanaEvento"
+        app:layout_constraintStart_toStartOf="@id/textViewNomeEvento"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEditarEvento"
+        tools:text="Sala dos Professores" />
+
+    <TextView
+        android:id="@+id/textViewObservacoesEvento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceCaption"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/textViewSalaLocalEvento"
+        app:layout_constraintStart_toStartOf="@id/textViewNomeEvento"
+        app:layout_constraintEnd_toEndOf="@id/textViewSalaLocalEvento"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Observações importantes sobre a reunião, discutir pautas X, Y e Z."
+        tools:visibility="visible"/>
+
+
+    <ImageButton
+        android:id="@+id/buttonDeletarEvento"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Deletar Evento"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="?attr/colorError" />
+
+    <ImageButton
+        android:id="@+id/buttonEditarEvento"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Editar Evento"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonDeletarEvento"
+        app:tint="?attr/colorPrimary" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

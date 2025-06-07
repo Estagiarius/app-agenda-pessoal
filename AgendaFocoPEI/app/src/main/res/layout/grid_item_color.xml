@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <View
+        android:id="@+id/viewColorChip"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+
+    <!-- Opcional: Adicionar um ImageView aqui para um ícone de "selecionado" -->
+    <!-- <ImageView
+        android:id="@+id/imageViewSelectedTick"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_check" // Exemplo, precisaria do drawable
+        android:visibility="gone"
+        android:layout_gravity="center" /> -->
+
+</FrameLayout>

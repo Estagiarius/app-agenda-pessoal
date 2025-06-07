@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <!--
+    TODO Define what data can be extracted.
+    For more information, see https://developer.android.com/guide/topics/data/autobackup
+    -->
+    <cloud-backup>
+        <!-- TODO: Use <include> and <exclude> to control what is backed up.
+        <include domain="sharedpref" path="."/>
+        <exclude domain="sharedpref" path="device.xml"/>
+        -->
+    </cloud-backup>
+    <device-transfer>
+        <!-- TODO: Use <include> and <exclude> to control what is transferred.
+        <include domain="sharedpref" path="."/>
+        <exclude domain="sharedpref" path="device.xml"/>
+        -->
+    </device-transfer>
+</data-extraction-rules>
