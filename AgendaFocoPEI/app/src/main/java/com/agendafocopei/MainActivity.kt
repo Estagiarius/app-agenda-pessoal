@@ -103,6 +103,11 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogFragment.ColorPickerL
             val intent = android.content.Intent(this, com.agendafocopei.ui.activity.GerenciarEventosActivity::class.java)
             startActivity(intent)
         }
+
+        binding.buttonVerDashboard.setOnClickListener {
+            val intent = android.content.Intent(this, com.agendafocopei.ui.activity.DashboardActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // Não precisamos mais de:

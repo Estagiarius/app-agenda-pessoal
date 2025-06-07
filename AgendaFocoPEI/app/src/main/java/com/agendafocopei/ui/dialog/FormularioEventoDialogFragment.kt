@@ -1,5 +1,6 @@
 package com.agendafocopei.ui.dialog
 
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.graphics.Color
@@ -13,13 +14,14 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.agendafocopei.R
 import com.agendafocopei.data.AppDatabase
-import com.agendafocopei.data.EventoRecorrente
-import com.agendafocopei.data.EventoRecorrenteDao
+import com.agendafocopei.data.Evento // Atualizado para Evento
+import com.agendafocopei.data.EventoDao // Atualizado para EventoDao
 import com.agendafocopei.databinding.DialogFormularioEventoBinding
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,19 +31,23 @@ class FormularioEventoDialogFragment : DialogFragment(), ColorPickerDialogFragme
     private val binding get() = _binding!!
 
     interface FormularioEventoListener {
-        fun onEventoSalvo(evento: EventoRecorrente)
+        fun onEventoSalvo(evento: Evento) // Atualizado para Evento
     }
 
     private var listener: FormularioEventoListener? = null
     private var eventoIdParaEdicao: Int? = null
-    private var eventoParaEdicao: EventoRecorrente? = null
+    private var eventoParaEdicao: Evento? = null // Atualizado para Evento
 
-    private lateinit var eventoRecorrenteDao: EventoRecorrenteDao
+    private lateinit var eventoDao: EventoDao // Atualizado para EventoDao
     private var corSelecionadaEvento: Int? = null
+    private var dataEspecificaSelecionada: Calendar? = null // Novo para data específica
 
     private var horaInicioSelecionada: Calendar = Calendar.getInstance()
     private var horaFimSelecionada: Calendar = Calendar.getInstance()
     private val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+    private val dateFormatterDisplay = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    private val dateFormatterStore = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
 
     companion object {
         const val TAG = "FormularioEventoDialog"
@@ -64,7 +70,7 @@ class FormularioEventoDialogFragment : DialogFragment(), ColorPickerDialogFragme
                 eventoIdParaEdicao = it.getInt(ARG_EVENTO_ID)
             }
         }
-        eventoRecorrenteDao = AppDatabase.getDatabase(requireContext()).eventoRecorrenteDao()
+        eventoDao = AppDatabase.getDatabase(requireContext()).eventoDao() // Atualizado para eventoDao()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -83,15 +89,20 @@ class FormularioEventoDialogFragment : DialogFragment(), ColorPickerDialogFragme
         setupDiaSemanaSpinner()
         setupTimePickers()
         setupColorPickerButton()
+        setupCheckBoxDiaUnico() // Novo
+        setupDatePickerDataEspecifica() // Novo
 
         if (eventoIdParaEdicao != null) {
-            binding.textViewFormularioEventoTitulo.text = "Editar Evento Recorrente"
+            binding.textViewFormularioEventoTitulo.text = "Editar Evento"
             carregarEventoParaEdicao(eventoIdParaEdicao!!)
         } else {
-            binding.textViewFormularioEventoTitulo.text = "Adicionar Evento Recorrente"
-            horaInicioSelecionada.set(Calendar.MINUTE, 0) // Hora cheia
+            binding.textViewFormularioEventoTitulo.text = "Adicionar Evento"
+            // Valores padrão para novo evento
+            binding.checkBoxEventoDiaUnico.isChecked = false // Default para recorrente
+            controlarVisibilidadeCamposData(false)
+            horaInicioSelecionada.set(Calendar.MINUTE, 0)
             horaFimSelecionada.set(Calendar.MINUTE, 0)
-            horaFimSelecionada.add(Calendar.HOUR_OF_DAY, 1) // Default 1 hora
+            horaFimSelecionada.add(Calendar.HOUR_OF_DAY, 1)
             atualizarTextoHora(binding.editTextHoraInicioEvento, horaInicioSelecionada)
             atualizarTextoHora(binding.editTextHoraFimEvento, horaFimSelecionada)
             updateColorPreview()
@@ -100,6 +111,45 @@ class FormularioEventoDialogFragment : DialogFragment(), ColorPickerDialogFragme
         binding.buttonSalvarEvento.setOnClickListener { salvarEvento() }
         binding.buttonCancelarEvento.setOnClickListener { dismiss() }
     }
+
+    private fun controlarVisibilidadeCamposData(isDiaUnico: Boolean) {
+        binding.layoutDataEspecificaEvento.visibility = if (isDiaUnico) View.VISIBLE else View.GONE
+        binding.layoutDiaSemanaEvento.visibility = if (isDiaUnico) View.GONE else View.VISIBLE
+    }
+
+    private fun setupCheckBoxDiaUnico() {
+        binding.checkBoxEventoDiaUnico.setOnCheckedChangeListener { _, isChecked ->
+            controlarVisibilidadeCamposData(isChecked)
+            if (!isChecked) {
+                dataEspecificaSelecionada = null
+                binding.editTextDataEspecificaEvento.text = null
+            } else {
+                if (dataEspecificaSelecionada == null) { // Abrir DatePicker se não houver data e marcar dia único
+                    abrirDatePickerParaDataEspecifica()
+                }
+            }
+        }
+    }
+
+    private fun setupDatePickerDataEspecifica() {
+        binding.editTextDataEspecificaEvento.setOnClickListener {
+            abrirDatePickerParaDataEspecifica()
+        }
+    }
+
+    private fun abrirDatePickerParaDataEspecifica() {
+        val calendarToShow = dataEspecificaSelecionada ?: Calendar.getInstance()
+        val year = calendarToShow.get(Calendar.YEAR)
+        val month = calendarToShow.get(Calendar.MONTH)
+        val day = calendarToShow.get(Calendar.DAY_OF_MONTH)
+
+        DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+            if (dataEspecificaSelecionada == null) dataEspecificaSelecionada = Calendar.getInstance()
+            dataEspecificaSelecionada!!.set(selectedYear, selectedMonth, selectedDayOfMonth)
+            binding.editTextDataEspecificaEvento.setText(dateFormatterDisplay.format(dataEspecificaSelecionada!!.time))
+        }, year, month, day).show()
+    }
+
 
     private fun setupDiaSemanaSpinner() {
         val diasSemana = resources.getStringArray(R.array.dias_semana_array)
@@ -117,7 +167,6 @@ class FormularioEventoDialogFragment : DialogFragment(), ColorPickerDialogFragme
     private fun setupColorPickerButton() {
         binding.buttonEscolherCorEvento.setOnClickListener {
             val dialog = ColorPickerDialogFragment.newInstance(corSelecionadaEvento, COLOR_PICKER_REQUEST_TAG)
-            // O listener será setado por este fragmento implementar a interface e o dialog procurar por ele no childFragmentManager
             dialog.show(childFragmentManager, ColorPickerDialogFragment.TAG)
         }
     }
@@ -142,20 +191,40 @@ class FormularioEventoDialogFragment : DialogFragment(), ColorPickerDialogFragme
 
     private fun carregarEventoParaEdicao(id: Int) {
         lifecycleScope.launch {
-            eventoParaEdicao = withContext(Dispatchers.IO) { eventoRecorrenteDao.buscarPorId(id) }
+            eventoParaEdicao = withContext(Dispatchers.IO) { eventoDao.buscarPorId(id) }
             eventoParaEdicao?.let { evento ->
                 binding.editTextNomeEvento.setText(evento.nomeEvento)
-                // Mapear diaDaSemana (Calendar.DAY_OF_WEEK) para índice do spinner (0-based)
-                // Ex: se array é Seg-Dom, e Calendar.MONDAY = 2, então índice = dia - 2
-                val spinnerPosition = evento.diaDaSemana - Calendar.MONDAY // Ajuste se seu array for diferente
-                if (spinnerPosition >= 0 && spinnerPosition < binding.spinnerDiaSemanaEvento.adapter.count) {
-                    binding.spinnerDiaSemanaEvento.setSelection(spinnerPosition)
+
+                if (evento.dataEspecifica != null) {
+                    binding.checkBoxEventoDiaUnico.isChecked = true
+                    controlarVisibilidadeCamposData(true)
+                    try {
+                        val date = dateFormatterStore.parse(evento.dataEspecifica!!)
+                        dataEspecificaSelecionada = Calendar.getInstance().apply { time = date!! }
+                        binding.editTextDataEspecificaEvento.setText(dateFormatterDisplay.format(dataEspecificaSelecionada!!.time))
+                    } catch (e: ParseException) {
+                        Toast.makeText(context, "Erro ao carregar data.", Toast.LENGTH_SHORT).show()
+                        dataEspecificaSelecionada = null // Reset
+                        binding.editTextDataEspecificaEvento.text = null
+                        binding.checkBoxEventoDiaUnico.isChecked = false // Volta para recorrente
+                        controlarVisibilidadeCamposData(false)
+                    }
+                } else {
+                    binding.checkBoxEventoDiaUnico.isChecked = false
+                    controlarVisibilidadeCamposData(false)
+                    // Ajuste para mapear Calendar.DAY_OF_WEEK (Dom=1..Sab=7) para índice do spinner (Seg=0..Dom=6)
+                    val spinnerPosition = when (evento.diaDaSemana) {
+                        Calendar.SUNDAY -> 6 // Último item no array "Seg-Dom"
+                        else -> evento.diaDaSemana - Calendar.MONDAY // Seg=0, Ter=1...
+                    }
+                    if (spinnerPosition >= 0 && spinnerPosition < binding.spinnerDiaSemanaEvento.adapter.count) {
+                        binding.spinnerDiaSemanaEvento.setSelection(spinnerPosition)
+                    }
                 }
 
                 try {
-                    val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
-                    horaInicioSelecionada.time = sdf.parse(evento.horaInicio) ?: Date()
-                    horaFimSelecionada.time = sdf.parse(evento.horaFim) ?: Date()
+                    horaInicioSelecionada.time = timeFormatter.parse(evento.horaInicio) ?: Date()
+                    horaFimSelecionada.time = timeFormatter.parse(evento.horaFim) ?: Date()
                 } catch (e: Exception) { /* Tratar erro */ }
                 atualizarTextoHora(binding.editTextHoraInicioEvento, horaInicioSelecionada)
                 atualizarTextoHora(binding.editTextHoraFimEvento, horaFimSelecionada)
@@ -168,18 +237,25 @@ class FormularioEventoDialogFragment : DialogFragment(), ColorPickerDialogFragme
         }
     }
 
-    private fun getDiaDaSemanaSelecionado(): Int {
-        // Mapeia a posição do spinner (0-based, Seg-Dom) para Calendar.DAY_OF_WEEK
-        return binding.spinnerDiaSemanaEvento.selectedItemPosition + Calendar.MONDAY
+    private fun getDiaDaSemanaSelecionadoDoSpinner(): Int {
+        // Mapeia a posição do spinner (Seg=0..Dom=6) para Calendar.DAY_OF_WEEK (Dom=1..Sab=7)
+        val selectedPosition = binding.spinnerDiaSemanaEvento.selectedItemPosition
+        return when (selectedPosition) {
+            6 -> Calendar.SUNDAY // Domingo
+            else -> selectedPosition + Calendar.MONDAY // Segunda a Sábado
+        }
     }
 
     private fun salvarEvento() {
         val nomeEvento = binding.editTextNomeEvento.text.toString().trim()
-        val diaSemana = getDiaDaSemanaSelecionado()
         val horaInicioStr = binding.editTextHoraInicioEvento.text.toString()
         val horaFimStr = binding.editTextHoraFimEvento.text.toString()
         val salaLocal = binding.editTextSalaLocalEvento.text.toString().trim()
         val observacoes = binding.editTextObservacoesEvento.text.toString().trim()
+
+        val isDiaUnico = binding.checkBoxEventoDiaUnico.isChecked
+        var diaSemanaParaSalvar: Int
+        var dataEspecificaParaSalvar: String? = null
 
         if (nomeEvento.isEmpty()) {
             binding.editTextNomeEvento.error = "Nome do evento é obrigatório"
@@ -196,15 +272,28 @@ class FormularioEventoDialogFragment : DialogFragment(), ColorPickerDialogFragme
             return
         }
 
-        val eventoParaSalvar = EventoRecorrente(
+        if (isDiaUnico) {
+            if (dataEspecificaSelecionada == null) {
+                Toast.makeText(context, "Selecione uma data para o evento de dia único.", Toast.LENGTH_SHORT).show()
+                binding.editTextDataEspecificaEvento.requestFocus() // Ou similar
+                return
+            }
+            dataEspecificaParaSalvar = dateFormatterStore.format(dataEspecificaSelecionada!!.time)
+            diaSemanaParaSalvar = dataEspecificaSelecionada!!.get(Calendar.DAY_OF_WEEK)
+        } else {
+            diaSemanaParaSalvar = getDiaDaSemanaSelecionadoDoSpinner()
+        }
+
+        val eventoParaSalvar = Evento(
             id = eventoIdParaEdicao ?: 0,
             nomeEvento = nomeEvento,
-            diaDaSemana = diaSemana,
+            diaDaSemana = diaSemanaParaSalvar,
             horaInicio = horaInicioStr,
             horaFim = horaFimStr,
             salaLocal = salaLocal.ifEmpty { null },
             cor = corSelecionadaEvento,
-            observacoes = observacoes.ifEmpty { null }
+            observacoes = observacoes.ifEmpty { null },
+            dataEspecifica = dataEspecificaParaSalvar
         )
 
         listener?.onEventoSalvo(eventoParaSalvar)

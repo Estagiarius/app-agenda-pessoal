@@ -13,9 +13,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         Turma::class,
         DisciplinaTurmaCrossRef::class,
         HorarioAula::class,
-        EventoRecorrente::class // <<< ADICIONADO EventoRecorrente
+            Evento::class // <<< ATUALIZADO para Evento
     ],
-    version = 5, // <<< INCREMENTADO PARA 5
+        version = 6, // <<< INCREMENTADO PARA 6
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -24,7 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun turmaDao(): TurmaDao
     abstract fun disciplinaTurmaDao(): DisciplinaTurmaDao
     abstract fun horarioAulaDao(): HorarioAulaDao
-    abstract fun eventoRecorrenteDao(): EventoRecorrenteDao // <<< NOVO DAO
+    abstract fun eventoDao(): EventoDao // <<< DAO RENOMEADO
 
     companion object {
         @Volatile
@@ -89,6 +89,15 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+            // NOVA MIGRAÇÃO DE 5 PARA 6
+            val MIGRATION_5_6 = object : Migration(5, 6) {
+                override fun migrate(database: SupportSQLiteDatabase) {
+                    // Adiciona a nova coluna 'data_especifica' à tabela 'eventos_recorrentes'
+                    // Mantendo o nome da tabela como 'eventos_recorrentes' por simplicidade nesta migração.
+                    database.execSQL("ALTER TABLE eventos_recorrentes ADD COLUMN data_especifica TEXT DEFAULT NULL")
+                }
+            }
+
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -96,7 +105,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "agenda_foco_pei_database"
                 )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5) // <<< ADICIONAR NOVA MIGRAÇÃO
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6) // <<< ADICIONAR NOVA MIGRAÇÃO
                 .build()
                 INSTANCE = instance
                 instance

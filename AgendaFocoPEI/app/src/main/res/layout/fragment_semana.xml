@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.agenda.SemanaFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSemanaAnterior"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@android:drawable/ic_media_previous"
+            app:iconTint="?attr/colorControlNormal"
+            tools:ignore="SpeakableTextPresentCheck" />
+            <!-- Use um ícone de seta para esquerda melhor -->
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewIntervaloSemana"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            tools:text="08/06 - 14/06/2024" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonProximaSemana"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@android:drawable/ic_media_next"
+            app:iconTint="?attr/colorControlNormal"
+            tools:ignore="SpeakableTextPresentCheck" />
+            <!-- Use um ícone de seta para direita melhor -->
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSemana"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/list_item_dia_da_semana"
+        tools:itemCount="7"/>
+
+</LinearLayout>

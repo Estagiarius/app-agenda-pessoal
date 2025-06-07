@@ -38,6 +38,15 @@
             android:name=".ui.activity.GerenciarEventosActivity"
             android:label="Eventos Recorrentes"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ui.activity.DashboardActivity"
+            android:label="Dashboard"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ui.activity.AgendaActivity"
+            android:label="Agenda"
+            android:parentActivityName=".DashboardActivity" />
+            <!-- Ou .MainActivity se preferir que volte direto para a tela principal -->
     </application>
 
 </manifest>
