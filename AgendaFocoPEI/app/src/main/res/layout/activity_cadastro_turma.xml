@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Adicionar Turma"
-        app:layout_constraintTop_toBottomOf="@id/buttonEscolherCorTurma" # Mudança aqui
+        app:layout_constraintTop_toBottomOf="@id/buttonEscolherCorTurma"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -59,8 +59,8 @@
         android:id="@+id/recyclerViewTurmas"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp" # Ajuste de margem
-        app:layout_constraintTop_toBottomOf="@id/buttonAdicionarTurma" # Mudança aqui
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonAdicionarTurma"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
