@@ -45,8 +45,10 @@ interface HorarioAulaDao {
             h.hora_fim AS horaFim,
             d.nome_disciplina AS nomeDisciplina,
             d.cor AS corDisciplina,
+            h.disciplinaId AS disciplinaId,
             t.nome_turma AS nomeTurma,
             t.cor AS corTurma,
+            h.turmaId AS turmaId,
             h.sala_aula AS salaAula
         FROM horarios_aula h
         INNER JOIN disciplinas d ON h.disciplinaId = d.id
@@ -64,8 +66,10 @@ interface HorarioAulaDao {
             h.hora_fim AS horaFim,
             d.nome_disciplina AS nomeDisciplina,
             d.cor AS corDisciplina,
+            h.disciplinaId AS disciplinaId,
             t.nome_turma AS nomeTurma,
             t.cor AS corTurma,
+            h.turmaId AS turmaId,
             h.sala_aula AS salaAula
         FROM horarios_aula h
         INNER JOIN disciplinas d ON h.disciplinaId = d.id
@@ -85,8 +89,10 @@ interface HorarioAulaDao {
             h.hora_fim AS horaFim,
             d.nome_disciplina AS nomeDisciplina,
             d.cor AS corDisciplina,
+            h.disciplinaId AS disciplinaId,
             t.nome_turma AS nomeTurma,
             t.cor AS corTurma,
+            h.turmaId AS turmaId,
             h.sala_aula AS salaAula
         FROM horarios_aula h
         INNER JOIN disciplinas d ON h.disciplinaId = d.id

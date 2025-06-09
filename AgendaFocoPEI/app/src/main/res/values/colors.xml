@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Cores base -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Material Theme Colors (Exemplos, podem ser customizados no themes.xml) -->
-    <color name="colorPrimary">#FF6200EE</color> <!-- Exemplo: Purple 500 -->
-    <color name="colorPrimaryVariant">#FF3700B3</color> <!-- Exemplo: Purple 700 -->
-    <color name="colorSecondary">#FF03DAC5</color> <!-- Exemplo: Teal 200 -->
-    <color name="colorSecondaryVariant">#FF018786</color> <!-- Exemplo: Teal 700 -->
+    <!-- Cores da Marca - Tema Claro (Padrão Material Design) -->
+    <color name="colorPrimary">#FF6200EE</color> <!-- Purple 500 -->
+    <color name="colorPrimaryVariant">#FF3700B3</color> <!-- Purple 700 -->
+    <color name="colorOnPrimary">#FFFFFFFF</color> <!-- Branco -->
+
+    <color name="colorSecondary">#FF03DAC5</color> <!-- Teal 200 -->
+    <color name="colorSecondaryVariant">#FF018786</color> <!-- Teal 700 -->
+    <color name="colorOnSecondary">#FF000000</color> <!-- Preto -->
+
+    <!-- Cores de Fundo e Superfície - Tema Claro -->
+    <color name="android_colorBackground">#FFFFFFFF</color> <!-- Branco -->
+    <color name="colorSurface">#FFFFFFFF</color> <!-- Branco -->
+    <color name="colorOnBackground">#FF000000</color> <!-- Preto -->
+    <color name="colorOnSurface">#FF000000</color> <!-- Preto -->
+
+    <!-- Cores de Erro - Tema Claro -->
+    <color name="colorError">#B00020</color> <!-- Vermelho Erro Padrão Material -->
+    <color name="colorOnError">#FFFFFFFF</color> <!-- Branco -->
+
+    <!-- Cores de Texto Principais - Tema Claro -->
+    <color name="textColorPrimaryLight">#DE000000</color> <!-- Preto 87% -->
+    <color name="textColorSecondaryLight">#8A000000</color> <!-- Preto 54% -->
+    <color name="textColorHintLight">#61000000</color> <!-- Preto 38% -->
+
+    <!-- Cores de Prioridade para Tarefas - Tema Claro -->
+    <color name="prioridade_baixa">#4CAF50</color> <!-- Verde 500 -->
+    <color name="prioridade_media">#FFC107</color> <!-- Ambar 500 -->
+    <color name="prioridade_alta">#F44336</color>  <!-- Vermelho 500 -->
+
+    <!-- Cor Padrão Cinza Claro (para indicadores não definidos) - Tema Claro -->
+    <color name="cor_padrao_cinza_claro">#FFE0E0E0</color> <!-- Cinza 300 -->
+
+    <!-- Cor do Divisor - Tema Claro -->
+    <color name="divider_color">#1F000000</color> <!-- Preto com 12% de opacidade -->
 </resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.PlanosDeAulaGeralActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayoutPlanosDeAula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarPlanosDeAula"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Planos de Aula" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPlanosDeAula"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/list_item_plano_de_aula"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:clipToPadding="false"/>
+
+    <TextView
+        android:id="@+id/textViewListaVaziaPlanos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nenhum plano de aula cadastrado."
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:visibility="gone"
+        app:layout_anchor="@id/recyclerViewPlanosDeAula"
+        app:layout_anchorGravity="center"
+        tools:visibility="visible"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdicionarPlanoDeAula"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="Adicionar Novo Plano de Aula"
+        app:srcCompat="@android:drawable/ic_input_add" /> <!-- Usar ícone melhor -->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

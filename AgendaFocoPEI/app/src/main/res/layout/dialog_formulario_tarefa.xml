@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textViewFormularioTarefaTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nova Tarefa"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDescricaoTarefa"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descrição da Tarefa*"
+            android:layout_marginBottom="12dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDescricaoTarefa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine|textCapSentences"
+                android:minLines="3"
+                android:gravity="top"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Prazo (Opcional)" android:textAppearance="?attr/textAppearanceCaption" android:layout_marginStart="4dp" android:layout_marginBottom="2dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPrazoDataTarefa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Data"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPrazoDataTarefa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPrazoHoraTarefa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:layout_marginStart="8dp"
+                android:hint="Hora"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPrazoHoraTarefa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <ImageButton
+                android:id="@+id/buttonLimparPrazoTarefa"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:contentDescription="Limpar Prazo"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="?attr/colorControlNormal"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Prioridade*" android:textAppearance="?attr/textAppearanceCaption" android:layout_marginStart="4dp" android:layout_marginBottom="2dp"/>
+        <Spinner
+            android:id="@+id/spinnerPrioridadeTarefa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Disciplina (Opcional)" android:textAppearance="?attr/textAppearanceCaption" android:layout_marginStart="4dp" android:layout_marginBottom="2dp"/>
+        <Spinner
+            android:id="@+id/spinnerDisciplinaTarefa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Turma (Opcional)" android:textAppearance="?attr/textAppearanceCaption" android:layout_marginStart="4dp" android:layout_marginBottom="2dp"/>
+        <Spinner
+            android:id="@+id/spinnerTurmaTarefa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_marginBottom="12dp"/> <!-- Reduzido marginBottom -->
+
+        <TextView
+            android:id="@+id/textViewLabelLembrete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lembrete (Requer Prazo)"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="2dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerLembreteTarefa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:enabled="false"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtarefas (Checklist)"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSubtarefas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:maxHeight="200dp"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/list_item_subtarefa"
+            tools:itemCount="2"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNovaSubtarefa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:hintEnabled="false"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextNovaSubtarefa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nova Subtarefa"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonAdicionarSubtarefa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                app:icon="@android:drawable/ic_input_add"
+                android:layout_marginStart="8dp"
+                android:minWidth="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonCancelarTarefa"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:layout_marginEnd="8dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonSalvarTarefa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salvar"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

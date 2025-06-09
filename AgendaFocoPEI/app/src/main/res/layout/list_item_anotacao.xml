@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <View
+            android:id="@+id/viewCorAnotacaoItem"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@android:color/holo_orange_light"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewConteudoAnotacaoItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:maxLines="4"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewCorAnotacaoItem"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayoutAnotacaoActions"
+            tools:text="Conteúdo da anotação que pode ser um pouco longo e ter múltiplas linhas para demonstração..." />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewTagsAnotacaoItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/textViewConteudoAnotacaoItem"
+            app:layout_constraintStart_toStartOf="@id/textViewConteudoAnotacaoItem"
+            app:layout_constraintEnd_toEndOf="@id/textViewConteudoAnotacaoItem"
+            tools:text="#ideia #importante" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewAssociacaoAnotacaoItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/textViewTagsAnotacaoItem"
+            app:layout_constraintStart_toStartOf="@id/textViewConteudoAnotacaoItem"
+            app:layout_constraintEnd_toEndOf="@id/textViewConteudoAnotacaoItem"
+            tools:text="Turma: 9A (Aluno: João)" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewDataModificacaoAnotacaoItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceOverline"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
+            android:layout_marginTop="4dp"
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf="@id/textViewAssociacaoAnotacaoItem"
+            app:layout_constraintStart_toStartOf="@id/textViewConteudoAnotacaoItem"
+            app:layout_constraintEnd_toEndOf="@id/textViewConteudoAnotacaoItem"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Modificado em: 10/06/24 15:30" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutAnotacaoActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/textViewConteudoAnotacaoItem"
+            android:layout_marginStart="8dp">
+
+            <ImageButton
+                android:id="@+id/buttonEditarAnotacaoItem"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Editar Anotação"
+                app:srcCompat="@android:drawable/ic_menu_edit"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageButton
+                android:id="@+id/buttonDeletarAnotacaoItem"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Deletar Anotação"
+                app:srcCompat="@android:drawable/ic_menu_delete"
+                app:tint="?attr/colorError" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

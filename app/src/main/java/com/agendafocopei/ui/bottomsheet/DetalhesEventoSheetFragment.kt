@@ -27,10 +27,12 @@ class DetalhesEventoSheetFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
 
     private lateinit var horarioAulaDao: HorarioAulaDao
-    private lateinit var eventoDao: EventoDao // Usar EventoDao
+    private lateinit var eventoDao: EventoDao
+    private lateinit var planoDeAulaDao: PlanoDeAulaDao // Novo DAO
 
-    private var itemId: Int = -1
+    private var itemId: Int = -1 // ID da Aula ou Evento
     private lateinit var itemType: String
+    private var aulaAtualDisplay: HorarioAulaDisplay? = null // Para armazenar dados da aula
 
     companion object {
         const val TAG = "DetalhesEventoSheet"
@@ -55,7 +57,8 @@ class DetalhesEventoSheetFragment : BottomSheetDialogFragment() {
         }
         val database = AppDatabase.getDatabase(requireContext())
         horarioAulaDao = database.horarioAulaDao()
-        eventoDao = database.eventoDao() // Usar eventoDao()
+        eventoDao = database.eventoDao()
+        planoDeAulaDao = database.planoDeAulaDao() // Inicializar novo DAO
     }
 
     override fun onCreateView(
@@ -117,6 +120,7 @@ class DetalhesEventoSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun popularUiComAula(aula: HorarioAulaDisplay) {
+        aulaAtualDisplay = aula // Armazena para uso no listener do botão de plano
         binding.viewCorDetalhesEvento.setBackgroundColor(aula.corDisciplina ?: Color.TRANSPARENT)
         binding.textViewNomeDetalhesEvento.text = aula.nomeDisciplina
         binding.textViewHorarioDetalhesEvento.text =
@@ -134,13 +138,47 @@ class DetalhesEventoSheetFragment : BottomSheetDialogFragment() {
         }
 
         binding.textViewObservacoesDetalhesEvento.visibility = View.GONE
+
+        // Lógica do botão Plano de Aula
         binding.buttonPlanoDeAulaDetalhes.visibility = View.VISIBLE
-        binding.buttonPlanoDeAulaDetalhes.setOnClickListener {
-            Toast.makeText(context, "Funcionalidade Plano de Aula em breve!", Toast.LENGTH_SHORT).show()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val planoExistente = withContext(Dispatchers.IO) {
+                planoDeAulaDao.buscarUmPorHorarioAulaId(aula.id) // aula.id é o HorarioAula.id
+            }
+            if (planoExistente != null) {
+                binding.buttonPlanoDeAulaDetalhes.text = "Editar Plano de Aula"
+                binding.buttonPlanoDeAulaDetalhes.setOnClickListener {
+                    FormularioPlanoDeAulaFragment.newInstance(
+                        planoId = planoExistente.id,
+                        horarioAulaId = aula.id, // Passa o ID do HorarioAula
+                        disciplinaIdPredefinida = aula.disciplinaId,
+                        turmaIdPredefinida = aula.turmaId,
+                        dataPredefinida = null // Data pode vir do plano ou do horário se necessário
+                    ).also { it.setListener(parentFragment as? FormularioPlanoDeAulaFragment.FormularioPlanoListener ?: activity as? FormularioPlanoDeAulaFragment.FormularioPlanoListener) }
+                     .show(parentFragmentManager, FormularioPlanoDeAulaFragment.TAG)
+                    dismiss() // Fecha o bottom sheet
+                }
+            } else {
+                binding.buttonPlanoDeAulaDetalhes.text = "Adicionar Plano de Aula"
+                binding.buttonPlanoDeAulaDetalhes.setOnClickListener {
+                    // Formatar data da aula se disponível (aula.diaDaSemana e horaInicio podem não ser suficientes para data exata)
+                    // Idealmente, o HorarioAulaDisplay teria a data exata se fosse de um dia específico
+                    // Por simplicidade, não passaremos data aqui, o usuário selecionará no formulário do plano.
+                    FormularioPlanoDeAulaFragment.newInstance(
+                        planoId = null,
+                        horarioAulaId = aula.id,
+                        disciplinaIdPredefinida = aula.disciplinaId,
+                        turmaIdPredefinida = aula.turmaId,
+                        dataPredefinida = null // Usuário define no formulário do plano
+                    ).also { it.setListener(parentFragment as? FormularioPlanoDeAulaFragment.FormularioPlanoListener ?: activity as? FormularioPlanoDeAulaFragment.FormularioPlanoListener) }
+                     .show(parentFragmentManager, FormularioPlanoDeAulaFragment.TAG)
+                    dismiss() // Fecha o bottom sheet
+                }
+            }
         }
     }
 
-    private fun popularUiComEvento(evento: Evento) { // Usar Evento
+    private fun popularUiComEvento(evento: Evento) {
         binding.viewCorDetalhesEvento.setBackgroundColor(evento.cor ?: Color.TRANSPARENT)
         binding.textViewNomeDetalhesEvento.text = evento.nomeEvento
         binding.textViewHorarioDetalhesEvento.text =

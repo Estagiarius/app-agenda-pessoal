@@ -53,7 +53,11 @@ dependencies {
     implementation "com.github.kizitonwose:calendarview:2.5.1"
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation "androidx.arch.core:core-testing:2.2.0" // Para InstantTaskExecutorRule
+    testImplementation "org.mockito:mockito-core:5.11.0"       // Para mock SharedPreferences
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3" // Para testes de corrotinas
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation "androidx.room:room-testing:$room_version" // Adicionado Room Testing
+    androidTestImplementation "androidx.room:room-testing:$room_version"
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores base para modo noturno -->
+    <color name="black">#FF000000</color> <!-- Mantido, mas geralmente não usado como fundo -->
+    <color name="white">#FFFFFFFF</color> <!-- Mantido para texto/ícones sobre fundos escuros -->
+
+    <!-- Cores da Marca - Tema Escuro -->
+    <color name="colorPrimary">#BB86FC</color> <!-- Roxo 200 (Material Design) -->
+    <color name="colorPrimaryVariant">#9962DD</color> <!-- Um tom um pouco mais escuro/dessaturado que o primary -->
+    <color name="colorOnPrimary">#000000</color> <!-- Preto (para contraste com roxo claro) -->
+
+    <color name="colorSecondary">#03DAC5</color> <!-- Teal 200 (Material Design - já é claro e vibrante) -->
+    <color name="colorSecondaryVariant">#018786</color> <!-- Teal 700 (Pode ser mantido ou ajustado) -->
+    <color name="colorOnSecondary">#000000</color> <!-- Preto (para contraste com teal claro) -->
+
+    <!-- Cores de Superfície e Fundo - Tema Escuro -->
+    <color name="android_colorBackground">#121212</color> <!-- Padrão Material para fundo escuro -->
+    <color name="colorSurface">#1E1E1E</color> <!-- Um pouco mais claro que o fundo, para cards, etc. -->
+    <!-- Ou use sobreposições de elevação:
+         Para Material 3, colorSurface é geralmente um tom neutro (ex: N10)
+         e as elevações adicionam um "tint" de colorPrimary.
+         Por simplicidade, vamos usar cores sólidas por enquanto.
+    -->
+    <color name="colorOnSurface">#E0E0E0</color> <!-- Branco com alta opacidade (ex: 87%) -->
+    <color name="colorOnBackground">#E0E0E0</color> <!-- Branco com alta opacidade -->
+
+    <!-- Cores de Erro - Tema Escuro -->
+    <color name="colorError">#CF6679</color> <!-- Vermelho claro do Material para temas escuros -->
+    <color name="colorOnError">#000000</color> <!-- Preto -->
+
+    <!-- Cores de Texto - Tema Escuro -->
+    <color name="textColorPrimaryDark">#DEFFFFFF</color> <!-- Branco 87% -->
+    <color name="textColorSecondaryDark">#B3FFFFFF</color> <!-- Branco 70% (Material sugere 60% para secondary, 38% para disabled) -->
+    <color name="textColorHintDark">#80FFFFFF</color> <!-- Branco 50% -->
+
+
+    <!-- Cores de Prioridade para Tarefas - Tema Escuro (ajustadas para melhor visibilidade) -->
+    <color name="prioridade_baixa">#81C784</color>  <!-- Verde 300 -->
+    <color name="prioridade_media">#FFB74D</color> <!-- Laranja 300 (em vez de Ambar para mais distinção) -->
+    <color name="prioridade_alta">#E57373</color>   <!-- Vermelho 300 -->
+
+    <!-- Cor Padrão Cinza Claro (para indicadores não definidos) - Tema Escuro -->
+    <color name="cor_padrao_cinza_claro">#424242</color> <!-- Cinza 800 (escuro) -->
+
+    <!-- Cor do Divisor - Tema Escuro -->
+    <color name="divider_color">#1FFFFFFF</color> <!-- Branco com 12% de opacidade -->
+</resources>

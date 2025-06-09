@@ -2,6 +2,7 @@ package com.agendafocopei.ui.agenda
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agendafocopei.R
 import com.agendafocopei.data.AppDatabase
-import com.agendafocopei.data.EventoDao // Usar EventoDao
+import com.agendafocopei.data.EventoDao
 import com.agendafocopei.data.HorarioAulaDao
 import com.agendafocopei.databinding.CalendarDayLayoutBinding
 import com.agendafocopei.databinding.FragmentMesBinding
@@ -27,10 +28,9 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.DayOfWeek as JavaTimeDayOfWeek // Alias para evitar conflito com Calendar.DAY_OF_WEEK
+import java.time.DayOfWeek as JavaTimeDayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
@@ -41,7 +41,7 @@ class MesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var horarioAulaDao: HorarioAulaDao
-    private lateinit var eventoDao: EventoDao // Usar EventoDao
+    private lateinit var eventoDao: EventoDao
     private lateinit var agendaAdapter: AgendaHojeAdapter
 
     private var selectedDate: LocalDate? = null
@@ -50,7 +50,7 @@ class MesFragment : Fragment() {
 
     private val localePtBr = Locale("pt", "BR")
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM yyyy", localePtBr)
-    private val queryDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", localePtBr)
+    private val queryDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault()) // Padrão ISO para DB
     private val displayDateFormatter = DateTimeFormatter.ofPattern("EEEE, dd 'de' MMMM", localePtBr)
 
 
@@ -67,7 +67,7 @@ class MesFragment : Fragment() {
 
         val appDatabase = AppDatabase.getDatabase(requireContext())
         horarioAulaDao = appDatabase.horarioAulaDao()
-        eventoDao = appDatabase.eventoDao() // Usar eventoDao()
+        eventoDao = appDatabase.eventoDao()
 
         agendaAdapter = AgendaHojeAdapter { item ->
             val (id, type) = when (item) {
@@ -88,6 +88,13 @@ class MesFragment : Fragment() {
         val currentMonth = YearMonth.now()
         binding.calendarViewMes.scrollToMonth(currentMonth)
         // loadEventsForVisibleMonth é chamado pelo monthScrollListener na configuração inicial
+    }
+
+    // Função para obter cor de atributo do tema
+    private fun getThemeColor(attr: Int): Int {
+        val typedValue = TypedValue()
+        requireContext().theme.resolveAttribute(attr, typedValue, true)
+        return typedValue.data
     }
 
     private fun setupCalendarView() {
@@ -112,28 +119,39 @@ class MesFragment : Fragment() {
             }
         }
 
+        val colorOnPrimary = getThemeColor(com.google.android.material.R.attr.colorOnPrimary)
+        val colorPrimary = getThemeColor(com.google.android.material.R.attr.colorPrimary)
+        val textColorPrimary = getThemeColor(android.R.attr.textColorPrimary)
+        val textColorTertiary = getThemeColor(android.R.attr.textColorTertiary)
+
+
         calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun create(view: View) = DayViewContainer(view)
             override fun bind(container: DayViewContainer, data: CalendarDay) {
                 container.day = data
                 container.textView.text = data.date.dayOfMonth.toString()
+                container.textView.background = null // Reset background
+                container.view.isClickable = false
+
 
                 if (data.position == DayPosition.MonthDate) {
-                    container.textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                     container.view.isClickable = true
-                    container.textView.background = null // Reset background
-
-                    if (data.date == selectedDate) {
-                        container.textView.setBackgroundResource(R.drawable.oval_indicator_background)
-                        container.textView.setTextColor(Color.WHITE)
-                    } else if (data.date == today) {
-                         container.textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+                    when {
+                        data.date == selectedDate -> {
+                            container.textView.setTextColor(colorOnPrimary)
+                            container.textView.setBackgroundResource(R.drawable.oval_indicator_background) // Usa ?attr/colorPrimary
+                        }
+                        data.date == today -> {
+                            container.textView.setTextColor(colorPrimary)
+                        }
+                        else -> {
+                            container.textView.setTextColor(textColorPrimary)
+                        }
                     }
                     container.indicatorView.visibility = if (eventsMap[data.date].orEmpty().isNotEmpty()) View.VISIBLE else View.INVISIBLE
                 } else {
-                    container.textView.setTextColor(Color.LTGRAY)
+                    container.textView.setTextColor(textColorTertiary) // Cor para dias fora do mês
                     container.indicatorView.visibility = View.INVISIBLE
-                    container.view.isClickable = false
                 }
             }
         }
@@ -147,7 +165,7 @@ class MesFragment : Fragment() {
         val currentMonth = YearMonth.now()
         val startMonth = currentMonth.minusMonths(100)
         val endMonth = currentMonth.plusMonths(100)
-        val daysOfWeek = daysOfWeek(firstDayOfWeek = JavaTimeDayOfWeek.MONDAY) // Use o alias
+        val daysOfWeek = daysOfWeek(firstDayOfWeek = JavaTimeDayOfWeek.MONDAY)
         calendarView.setup(startMonth, endMonth, daysOfWeek.first())
         calendarView.scrollToMonth(currentMonth)
     }
@@ -171,7 +189,6 @@ class MesFragment : Fragment() {
             val lastDayOfMonth = yearMonth.atEndOfMonth()
             val tempEventsMap = mutableMapOf<LocalDate, MutableList<ItemAgendaDashboard>>()
 
-            // Itera por cada dia do mês para carregar eventos
             var currentDateIterator = firstDayOfMonth
             while (currentDateIterator <= lastDayOfMonth) {
                 val cal = Calendar.getInstance().apply {
@@ -181,17 +198,21 @@ class MesFragment : Fragment() {
                 val diaSemanaQuery = cal.get(Calendar.DAY_OF_WEEK)
                 val dataFormatadaQuery = queryDateFormatter.format(currentDateIterator)
 
-                // Coleta os flows para o dia atual
                 val aulasDoDia = withContext(Dispatchers.IO) { horarioAulaDao.buscarTodosParaDisplayPorDia(diaSemanaQuery).first() }
                 val eventosDoDia = withContext(Dispatchers.IO) { eventoDao.buscarEventosParaData(diaSemanaQuery, dataFormatadaQuery).first() }
 
                 val itensDoDia = mutableListOf<ItemAgendaDashboard>()
-                aulasDoDia.forEach { aula ->
-                    // Adicionar apenas se a aula for recorrente ou na data específica
-                    // (buscarTodosParaDisplayPorDia já considera apenas dia da semana, então está ok para aulas recorrentes)
-                     itensDoDia.add(ItemAgendaDashboard.AulaItem(aula))
+                // Para aulas, verificamos se a data da aula (se existir) corresponde ao dia atual do loop
+                // ou se é uma aula recorrente para o dia da semana.
+                aulasDoDia.forEach { aulaDisplay ->
+                     // HorarioAulaDisplay não tem dataAula diretamente, o HorarioAula original sim.
+                     // A query buscarTodosParaDisplayPorDia já filtra pelo dia da semana.
+                     // Se precisássemos filtrar aulas únicas por data específica aqui, precisaríamos da data no HorarioAulaDisplay.
+                     // Por ora, todas as aulas retornadas para aquele dia da semana são adicionadas.
+                    itensDoDia.add(ItemAgendaDashboard.AulaItem(aulaDisplay))
                 }
-                eventosDoDia.forEach { evento -> // Evento já considera data específica ou dia da semana
+                eventosDoDia.forEach { evento ->
+                    // A query buscarEventosParaData já lida com dataEspecifica OU diaDaSemana.
                     itensDoDia.add(ItemAgendaDashboard.EventoItem(evento))
                 }
 
@@ -205,7 +226,7 @@ class MesFragment : Fragment() {
             eventsMap.clear()
             eventsMap.putAll(tempEventsMap)
             binding.calendarViewMes.notifyCalendarChanged()
-            updateEventsListForSelectedDate() // Atualiza a lista para a data selecionada, se houver
+            updateEventsListForSelectedDate()
         }
     }
 
@@ -218,7 +239,7 @@ class MesFragment : Fragment() {
             binding.textViewNenhumEventoMes.text = "Selecione um dia para ver os eventos."
         } else {
             val eventosDoDia = eventsMap[date].orEmpty()
-            agendaAdapter.submitList(eventosDoDia.sortedBy { it.horaInicio }) // Garante ordenação final
+            agendaAdapter.submitList(eventosDoDia.sortedBy { it.horaInicio })
 
             var dataFormatada = date.format(displayDateFormatter)
             dataFormatada = dataFormatada.split(" ").map {palavra ->

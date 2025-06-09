@@ -103,18 +103,23 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    private fun atualizarUIProximoCompromisso(proximaAula: HorarioAulaDisplay?, proximoEvento: EventoRecorrente?) {
-        val cardProximoCompromisso = binding.cardViewProximoCompromisso // Usando ViewBinding
+    private fun atualizarUIProximoCompromisso(proximaAula: HorarioAulaDisplay?, proximoEvento: Evento?) {
+        // val cardProximoCompromisso = binding.cardViewProximoCompromisso // Não muda mais o fundo do card
+        val indicadorCor = binding.viewCorProximoCompromissoIndicador // Nova View para a cor
 
         val nenhumCompromisso = proximaAula == null && proximoEvento == null
         binding.textViewNenhumCompromissoHoje.visibility = if (nenhumCompromisso) View.VISIBLE else View.GONE
 
+        // Controla a visibilidade do Card inteiro baseado na existência de compromissos
+        binding.cardViewProximoCompromisso.visibility = if (nenhumCompromisso) View.GONE else View.VISIBLE
+        // Se não há compromissos, o título da seção também pode ser ocultado ou modificado
+        binding.textViewTituloProximoCompromisso.text = if (nenhumCompromisso) "Próximo Compromisso: Nenhum" else "Próximo Compromisso:"
+
+
         if (nenhumCompromisso) {
-            binding.textViewHorarioProximoCompromisso.visibility = View.GONE
-            binding.textViewNomeProximoCompromisso.visibility = View.GONE
-            binding.textViewTurmaProximoCompromisso.visibility = View.GONE
-            binding.textViewSalaLocalProximoCompromisso.visibility = View.GONE
-            cardProximoCompromisso.setCardBackgroundColor(Color.TRANSPARENT) // Ou cor padrão
+            // Os TextViews dentro do card serão ocultados pelo card pai se o card for GONE
+            // Mas para garantir, podemos ocultá-los também ou apenas retornar.
+            indicadorCor.setBackgroundColor(Color.TRANSPARENT)
             return
         }
 
@@ -174,7 +179,8 @@ class DashboardActivity : AppCompatActivity() {
             binding.textViewTurmaProximoCompromisso.visibility = View.GONE
         }
 
-        cardProximoCompromisso.setCardBackgroundColor(compromissoCor ?: Color.parseColor("#E0E0E0"))
+        // cardProximoCompromisso.setCardBackgroundColor(compromissoCor ?: Color.parseColor("#E0E0E0"))
+        indicadorCor.setBackgroundColor(compromissoCor ?: Color.TRANSPARENT) // Usa cor padrão ou transparente se nula
     }
 
     private fun carregarAgendaDoDia() {

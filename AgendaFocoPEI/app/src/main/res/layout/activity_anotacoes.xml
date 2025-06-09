@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.AnotacoesActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayoutAnotacoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarAnotacoes"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Minhas Anotações" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAnotacoes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/list_item_anotacao"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:clipToPadding="false"/>
+
+    <TextView
+        android:id="@+id/textViewListaVaziaAnotacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nenhuma anotação encontrada."
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:visibility="gone"
+        app:layout_anchor="@id/recyclerViewAnotacoes"
+        app:layout_anchorGravity="center"
+        tools:visibility="visible"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdicionarAnotacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="Adicionar Nova Anotação"
+        app:srcCompat="@android:drawable/ic_input_add" /> <!-- Usar ícone melhor -->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
