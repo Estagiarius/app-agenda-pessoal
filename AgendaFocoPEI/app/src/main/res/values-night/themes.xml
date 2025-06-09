@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme for night mode. -->
+    <style name="Theme.AgendaFocoPEI" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Cores da Marca -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+        <!-- Cores de Fundo e Superfície -->
+        <item name="android:colorBackground">@color/android_colorBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+
+        <!-- Cores de Erro -->
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
+
+        <!-- Cores de Texto Principais -->
+        <!-- android:textColorPrimary é usado por muitos componentes Material para o texto principal -->
+        <item name="android:textColorPrimary">@color/textColorPrimaryDark</item>
+        <!-- android:textColorSecondary é usado para texto menos proeminente -->
+        <item name="android:textColorSecondary">@color/textColorSecondaryDark</item>
+        <item name="android:textColorHint">@color/textColorHintDark</item>
+
+        <!-- Cor da Barra de Status -->
+        <!-- Usar colorSurface para a barra de status em modo escuro é comum -->
+        <item name="android:statusBarColor">@color/colorSurface</item>
+        <!-- Ou, se quiser que seja igual à AppBar: ?attr/colorPrimaryVariant ou ?attr/colorPrimarySurface -->
+
+        <!-- Outras personalizações de tema para modo noturno podem vir aqui -->
+    </style>
+</resources>

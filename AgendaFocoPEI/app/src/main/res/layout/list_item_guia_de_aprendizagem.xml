@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <View
+            android:id="@+id/viewCorGuia"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@color/colorSecondary"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewTituloGuiaItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewCorGuia"
+            app:layout_constraintEnd_toStartOf="@+id/buttonEditarGuia"
+            tools:text="Guia: Física - 3º Bim 2024" />
+            <!-- Opcional: Usar guia.tituloGuia se não nulo, senão gerar -->
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewProgressoChecklistGuia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewTituloGuiaItem"
+            app:layout_constraintStart_toStartOf="@id/textViewTituloGuiaItem"
+            tools:text="Checklist: 5/10" />
+
+        <ImageView
+            android:id="@+id/imageViewAnexoIconGuia"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@android:drawable/ic_menu_attachment"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/textViewProgressoChecklistGuia"
+            app:layout_constraintStart_toStartOf="@id/textViewTituloGuiaItem"
+            android:layout_marginTop="4dp"
+            app:tint="?android:attr/textColorSecondary"
+            android:contentDescription="Possui anexo" />
+
+
+        <ImageButton
+            android:id="@+id/buttonDeletarGuia"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Deletar Guia"
+            app:srcCompat="@android:drawable/ic_menu_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?attr/colorError" />
+
+        <ImageButton
+            android:id="@+id/buttonEditarGuia"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Editar Guia"
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/buttonDeletarGuia"
+            app:tint="?attr/colorPrimary" />
+
+        <ImageButton
+            android:id="@+id/buttonDetalhesGuia"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Ver Detalhes do Guia"
+            app:srcCompat="@android:drawable/ic_menu_info_details"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?attr/colorControlNormal" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

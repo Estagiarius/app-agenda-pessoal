@@ -10,8 +10,10 @@ data class HorarioAulaDisplay(
     val horaFim: String,
     val nomeDisciplina: String,
     val corDisciplina: Int?,
+    val disciplinaId: Int, // NOVO
     val nomeTurma: String,
     val corTurma: Int?,
+    val turmaId: Int, // NOVO
     val salaAula: String?
 ) {
     fun getDiaDaSemanaFormatado(): String {

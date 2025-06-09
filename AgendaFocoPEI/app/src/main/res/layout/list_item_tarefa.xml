@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <View
+            android:id="@+id/viewPrioridadeTarefa"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@android:color/holo_red_dark"/>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkBoxTarefaConcluida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewPrioridadeTarefa"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:minWidth="0dp"
+            android:minHeight="0dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewTarefaDescricao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/checkBoxTarefaConcluida"
+            app:layout_constraintEnd_toStartOf="@+id/buttonEditarTarefaItem"
+            tools:text="Descrição da Tarefa que pode ser um pouco longa para caber em uma linha só." />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewTarefaPrazo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewTarefaDescricao"
+            app:layout_constraintStart_toStartOf="@id/textViewTarefaDescricao"
+            tools:text="Prazo: 25/12/2024 18:00" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupAssociacoesTarefa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:chipSpacingHorizontal="4dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewTarefaPrazo"
+            app:layout_constraintStart_toStartOf="@id/textViewTarefaDescricao"
+            app:layout_constraintEnd_toEndOf="@id/textViewTarefaDescricao"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDisciplinaTarefa"
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:text="Matemática"
+                tools:visibility="visible"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTurmaTarefa"
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:text="9A"
+                tools:visibility="visible"/>
+        </com.google.android.material.chip.ChipGroup>
+
+        <ImageButton
+            android:id="@+id/buttonEditarTarefaItem"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Editar Tarefa"
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?attr/colorPrimary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.agendafocopei">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -46,7 +54,34 @@
             android:name=".ui.activity.AgendaActivity"
             android:label="Agenda"
             android:parentActivityName=".DashboardActivity" />
-            <!-- Ou .MainActivity se preferir que volte direto para a tela principal -->
+        <activity
+            android:name=".ui.activity.PlanosDeAulaGeralActivity"
+            android:label="Planos de Aula"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ui.activity.GuiasDeAprendizagemActivity"
+            android:label="Guias de Aprendizagem"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ui.activity.DetalhesGuiaActivity"
+            android:label="Detalhes do Guia"
+            android:parentActivityName=".ui.activity.GuiasDeAprendizagemActivity" />
+        <activity
+            android:name=".ui.activity.TemplatesPlanoAulaActivity"
+            android:label="Templates de Plano de Aula"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ui.activity.TarefasActivity"
+            android:label="Minhas Tarefas"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ui.activity.PomodoroActivity"
+            android:label="Pomodoro"
+            android:parentActivityName=".DashboardActivity" />
+        <activity
+            android:name=".ui.activity.AnotacoesActivity"
+            android:label="Minhas Anotações"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
