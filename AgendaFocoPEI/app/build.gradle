@@ -50,7 +50,7 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version" // Kotlin Extensions and Coroutines support
 
     // CalendarView by Kizitonwose
-    implementation "com.github.kizitonwose:calendarview:2.5.1"
+    implementation "com.github.kizitonwose:calendarview:1.0.0"
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.arch.core:core-testing:2.2.0" // Para InstantTaskExecutorRule
