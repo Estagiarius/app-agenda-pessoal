@@ -53,7 +53,7 @@
         <activity
             android:name=".ui.activity.AgendaActivity"
             android:label="Agenda"
-            android:parentActivityName=".DashboardActivity" />
+            android:parentActivityName=".ui.activity.DashboardActivity" />
         <activity
             android:name=".ui.activity.PlanosDeAulaGeralActivity"
             android:label="Planos de Aula"
@@ -77,7 +77,7 @@
         <activity
             android:name=".ui.activity.PomodoroActivity"
             android:label="Pomodoro"
-            android:parentActivityName=".DashboardActivity" />
+            android:parentActivityName=".ui.activity.DashboardActivity" />
         <activity
             android:name=".ui.activity.AnotacoesActivity"
             android:label="Minhas Anotações"
