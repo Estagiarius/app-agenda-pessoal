@@ -1,87 +1,49 @@
-<application
-    android:allowBackup="true"
-    android:dataExtractionRules="@xml/data_extraction_rules"
-    android:fullBackupContent="@xml/backup_rules"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.AgendaFocoPEI"
-    tools:targetApi="31">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.agendafocopei">
 
-    <!-- Todas as Activities agora estão no pacote .ui.activity -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-    <activity
-        android:name=".ui.activity.MainActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity
-        android:name=".ui.activity.CadastroTurmaActivity"
-        android:label="Cadastrar Turmas"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false" />
-    <activity
-        android:name=".ui.activity.AssociarDisciplinasActivity"
-        android:label="Associar Disciplinas"
-        android:parentActivityName=".ui.activity.CadastroTurmaActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.GerenciarHorarioActivity"
-        android:label="Meus Horários"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.GerenciarEventosActivity"
-        android:label="Eventos Recorrentes"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.DashboardActivity"
-        android:label="Dashboard"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.AgendaActivity"
-        android:label="Agenda"
-        android:parentActivityName=".ui.activity.DashboardActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.PlanosDeAulaGeralActivity"
-        android:label="Planos de Aula"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.GuiasDeAprendizagemActivity"
-        android:label="Guias de Aprendizagem"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.DetalhesGuiaActivity"
-        android:label="Detalhes do Guia"
-        android:parentActivityName=".ui.activity.GuiasDeAprendizagemActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.TemplatesPlanoAulaActivity"
-        android:label="Templates de Plano de Aula"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.TarefasActivity"
-        android:label="Minhas Tarefas"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.PomodoroActivity"
-        android:label="Pomodoro"
-        android:parentActivityName=".ui.activity.DashboardActivity"
-        android:exported="false"/>
-    <activity
-        android:name=".ui.activity.AnotacoesActivity"
-        android:label="Minhas Anotações"
-        android:parentActivityName=".ui.activity.MainActivity"
-        android:exported="false"/>
-</application>
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
+
+    <!-- O BLOCO A SEGUIR ESTÁ DENTRO DA TAG MANIFEST -->
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AgendaFocoPEI"
+        tools:targetApi="31">
+
+        <!-- Verifique se todas as suas Activities estão na pasta /ui/activity -->
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.CadastroTurmaActivity"
+            android:label="Cadastrar Turmas"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AssociarDisciplinasActivity"
+            android:label="Associar Disciplinas"
+            android:parentActivityName=".ui.activity.CadastroTurmaActivity"
+            android:exported="false"/>
+        <!-- Adicione aqui as outras activities, sempre com o caminho .ui.activity.NomeDaActivity -->
+
+    </application>
+
+</manifest> <!-- CERTIFIQUE-SE QUE ESTA LINHA ESTÁ NO FINAL -->
