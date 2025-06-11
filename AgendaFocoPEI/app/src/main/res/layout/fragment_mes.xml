@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         app:cv_dayViewResource="@layout/calendar_day_layout"
         app:cv_orientation="horizontal"
-        app:cv_scrollPaged="true"
+        app:cv_scrollMode="paged"
         app:cv_outDateStyle="endOfRow"
         />
         <!-- app:cv_monthHeaderResource="@layout/calendar_header_layout" se precisar de header customizado -->
