@@ -42,6 +42,38 @@
             android:label="Associar Disciplinas"
             android:parentActivityName=".ui.activity.CadastroTurmaActivity"
             android:exported="false"/>
+
+        <activity
+            android:name=".ui.activity.FormularioAlunoActivity"
+            android:label="Cadastrar Aluno"
+            android:parentActivityName=".ui.activity.ListaAlunosActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.activity.ListaAlunosActivity"
+            android:label="Lista de Alunos"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.activity.FormularioAnotacaoActivity"
+            android:label="Criar Anotação"
+            android:parentActivityName=".ui.activity.ListaAnotacoesActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.activity.ListaAnotacoesActivity"
+            android:label="Lista de Anotações"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.activity.FormularioCompromissoActivity"
+            android:label="Criar Compromisso"
+            android:parentActivityName=".ui.activity.ListaCompromissosActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.activity.ListaCompromissosActivity"
+            android:label="Lista de Compromissos"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:exported="false"/>
+
         <!-- Adicione aqui as outras activities, sempre com o caminho .ui.activity.NomeDaActivity -->
 
     </application>
