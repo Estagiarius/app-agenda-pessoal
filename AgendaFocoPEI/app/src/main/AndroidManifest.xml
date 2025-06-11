@@ -22,7 +22,7 @@
         android:theme="@style/Theme.AgendaFocoPEI"
         tools:targetApi="31">
         <activity
-            android:name="MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,55 +33,68 @@
         <activity
             android:name=".CadastroTurmaActivity"
             android:label="Cadastrar Turmas"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".AssociarDisciplinasActivity"
             android:label="Associar Disciplinas"
-            android:parentActivityName=".CadastroTurmaActivity" />
+            android:parentActivityName=".CadastroTurmaActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.GerenciarHorarioActivity"
             android:label="Meus Horários"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.GerenciarEventosActivity"
             android:label="Eventos Recorrentes"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.DashboardActivity"
             android:label="Dashboard"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.AgendaActivity"
             android:label="Agenda"
-            android:parentActivityName=".ui.activity.DashboardActivity" />
+            android:parentActivityName=".ui.activity.DashboardActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.PlanosDeAulaGeralActivity"
             android:label="Planos de Aula"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.GuiasDeAprendizagemActivity"
             android:label="Guias de Aprendizagem"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.DetalhesGuiaActivity"
             android:label="Detalhes do Guia"
-            android:parentActivityName=".ui.activity.GuiasDeAprendizagemActivity" />
+            android:parentActivityName=".ui.activity.GuiasDeAprendizagemActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.TemplatesPlanoAulaActivity"
             android:label="Templates de Plano de Aula"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.TarefasActivity"
             android:label="Minhas Tarefas"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.PomodoroActivity"
             android:label="Pomodoro"
-            android:parentActivityName=".ui.activity.DashboardActivity" />
+            android:parentActivityName=".ui.activity.DashboardActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.AnotacoesActivity"
             android:label="Minhas Anotações"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
