@@ -17,9 +17,9 @@ import androidx.room.*
 data class Anotacao(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(typeAffinity = ColumnInfo.TEXT) var conteudo: String,
-    @ColumnInfo(name = "data_criacao", defaultValue = "0") // DefaultValue para Room
+    @ColumnInfo(name = "data_criacao", defaultValue = "0L") // DefaultValue para Room
     val dataCriacao: Long = System.currentTimeMillis(),
-    @ColumnInfo(name = "data_modificacao", defaultValue = "0") // DefaultValue para Room
+    @ColumnInfo(name = "data_modificacao", defaultValue = "0L") // DefaultValue para Room
     var dataModificacao: Long = System.currentTimeMillis(),
     var cor: Int? = null, // ARGB Int color
     var turmaId: Int?,
